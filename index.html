@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agraracks • Diário de Bordo Comercial</title>
+
+<style>
+:root{
+  --bg:#0b1220;
+  --text:#e9eefc;
+  --muted:#a9b4d4;
+  --line:rgba(255,255,255,.12);
+  --brand:#7c5cff;
+  --brand2:#00d4ff;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background:linear-gradient(180deg,#060b15,#0b1220);
+  color:var(--text);
+}
+.container{
+  max-width:1320px;
+  margin:16px auto;
+  padding:0 12px 32px;
+}
+
+/* HEADER */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.03);
+}
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.brand h1{
+  margin:0;
+  font-size:18px;
+}
+.brand p{
+  margin:2px 0 0;
+  font-size:12px;
+  color:var(--muted);
+}
+.logo img{
+  height:26px;
+}
+
+/* BUTTONS */
+.btn{
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  font-weight:700;
+  cursor:pointer;
+}
+.btn.primary{
+  border-color:var(--brand);
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+}
+
+/* LAYOUT */
+.shell{
+  margin-top:14px;
+  padding:16px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.grid{
+  display:grid;
+  grid-template-columns:1.4fr .6fr;
+  gap:16px;
+}
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+}
+
+/* CARD */
+.card{
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+}
+.card .hd{
+  padding:14px 16px;
+  border-bottom:1px solid var(--line);
+  font-weight:800;
+}
+.card .bd{padding:16px}
+
+/* FORM */
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.field{flex:1;min-width:200px}
+label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+input,textarea,select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+}
+textarea{min-height:70px}
+
+/* TABS */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.tab{
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  cursor:pointer;
+}
+.tab.active{
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  border-color:transparent;
+}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+@media(max-width:700px){.kpis{grid-template-columns:1fr}}
+.kpi{
+  border-radius:16px;
+  border:1px solid var(--line);
+  padding:12px;
+  background:rgba(255,255,255,.05);
+}
+.kpi .label{font-size:12px;color:var(--muted)}
+.kpi .value{font-size:18px;font-weight:800;margin-top:4px}
+
+/* PRINT */
+#printView{display:none}
+@media print{
+  body{background:#fff;color:#111}
+  .topbar,.shell{display:none}
+  #printView{display:block}
+  #printView{
+    border:1px solid #ddd;
+    padding:12px;
+    font-size:11px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="topbar">
+    <div class="brand">
+      <div>
+        <h1>Agraracks • Diário de Bordo Comercial</h1>
+        <p>Part-time • 09:00 às 13:00</p>
+      </div>
+    </div>
+    <div class="logo">
+      <!-- SUBSTITUA src PELA SUA LOGO EM BASE64 OU ARQUIVO LOCAL -->
+      <img src="logo-agraracks.png" alt="Agraracks">
+    </div>
+  </div>
+
+  <div class="shell">
+    <div class="grid">
+
+      <!-- ESQUERDA -->
+      <div class="card">
+        <div class="hd">Dados do dia</div>
+        <div class="bd">
+          <div class="row">
+            <div class="field">
+              <label>Comercial</label>
+              <input>
+            </div>
+            <div class="field">
+              <label>Data</label>
+              <input type="date">
+            </div>
+          </div>
+
+          <div class="tabs">
+            <div class="tab active">📧 E-mails</div>
+            <div class="tab">📞 Ligações</div>
+            <div class="tab">💬 Mensagens</div>
+            <div class="tab">🧾 Vendas</div>
+          </div>
+
+          <!-- EMAILS -->
+          <div class="row">
+            <div class="field">
+              <label>Início</label>
+              <input type="time" value="09:00">
+            </div>
+            <div class="field">
+              <label>Fim</label>
+              <input type="time" value="13:00">
+            </div>
+            <div class="field">
+              <label>Qtd. e-mails</label>
+              <input type="number">
+            </div>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi">
+              <div class="label">Tempo total</div>
+              <div class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Média por e-mail</div>
+              <div class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">E-mails / hora</div>
+              <div class="value">—</div>
+            </div>
+          </div>
+
+          <label style="margin-top:10px">Observações</label>
+          <textarea></textarea>
+        </div>
+      </div>
+
+      <!-- DIREITA -->
+      <div class="card">
+        <div class="hd">Resumo</div>
+        <div class="bd">
+          <div class="kpis">
+            <div class="kpi">
+              <div class="label">E-mails</div>
+              <div class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Ligações</div>
+              <div class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Mensagens</div>
+              <div class="value">—</div>
+            </div>
+          </div>
+
+          <label style="margin-top:12px">Pendências</label>
+          <textarea></textarea>
+
+          <div style="margin-top:14px">
+            <button class="btn primary" onclick="window.print()">Gerar PDF</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PDF -->
+  <div id="printView">
+    <strong>AGRARACKS • DIÁRIO DE BORDO COMERCIAL</strong><br><br>
+    (Resumo automático aqui)
+  </div>
+
+</div>
+
+</body>
+</html>
